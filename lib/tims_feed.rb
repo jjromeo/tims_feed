@@ -10,11 +10,10 @@ class TimsFeed
 
   def information_points
     disruptions.map do |disruption|
-      comment = disruption.css('comments').first.text
-      status = disruption.css('status').first.text
-      start_time = format_datetime(disruption.css('startTime').first.text)
-      end_time_node = disruption.css('endTime').first
-      end_time = end_time_node ? format_datetime(end_time_node.text) : nil
+      comment = get_disruption_text(disruption, 'comments')
+      status = get_disruption_text(disruption, 'status')
+      start_time = format_datetime(get_disruption_text(disruption, 'startTime'))
+      end_time = format_datetime(get_disruption_text(disruption, 'endTime'))
 
       { commentary: comment, status: status, start_time: start_time, end_time: end_time, display_points: display_points(disruption) }
     end
@@ -22,8 +21,13 @@ class TimsFeed
 
   private
 
+  def get_disruption_text(disruption, css_selector)
+    element = disruption.css(css_selector).first
+    element ? element.text : nil
+  end
+
   def format_datetime(datetime_string)
-    DateTime.parse(datetime_string).strftime('%H:%M:%S %d %B %Y')
+    datetime_string ? DateTime.parse(datetime_string).strftime('%H:%M:%S %d %B %Y') : nil
   end
 
   def response
