@@ -29,7 +29,6 @@ function initMap() {
     });
 
     var markerCluster = new MarkerClusterer(map, markers,
-    { gridSize: 30, imagePath: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m' });
-    console.log('gridding')
+    { maxZoom: 15, gridSize: 50, imagePath: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m' });
   });
 }
