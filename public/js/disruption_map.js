@@ -1,5 +1,13 @@
 var map;
 function initMap() {
+  STATUS_COLOURS = {
+    'Active': 'red',
+    'Active Long Term': 'purple',
+    'Scheduled': 'green',
+    'Recurring Works': 'brown',
+    'Recently Cleared': 'green'
+  }
+
   $.get('/disruptions', function(disruptions) {
     map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 51.5060624, lng: -0.1332773 },
@@ -8,9 +16,11 @@ function initMap() {
     var markers = [];
 
     disruptions.map(function(disruption) {
-      var infoWindow = new google.maps.InfoWindow({ content: disruption.commentary })
+      var content = disruption.commentary + ' <b>Status: </b> ' + disruption.status
+      var infoWindow = new google.maps.InfoWindow({ content: content })
       disruption.display_points.map(function(latlng) {
-        var marker = new google.maps.Marker({ position: latlng })
+        var icon = 'images/markers/' + STATUS_COLOURS[disruption.status] + '_MarkerA.png'
+        var marker = new google.maps.Marker({ position: latlng, icon: icon })
         marker.addListener('click', function() {
           infoWindow.open(map, marker);
         })
