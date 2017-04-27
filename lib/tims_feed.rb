@@ -26,11 +26,11 @@ class TimsFeed
   end
 
   def display_points(disruption)
-    disruption.css('coordinatesEN').map {|coordinates_element| create_location(coordinates_element.text) }
+    disruption.css('coordinatesLL').map {|coordinates_element| create_location(coordinates_element.text) }
   end
 
   def create_location(coordinates)
     longitude, latitude = coordinates.split(",")
-    { longitude: longitude, latitude: latitude }
+    { lat: latitude.to_f, lng: longitude.to_f }
   end
 end

@@ -32,7 +32,7 @@ RSpec.describe 'server' do
     end
 
     it 'gets an array of coordinates to display points' do
-      expect(@first_disruption["display_points"].first).to eq({ "longitude" => "532469", "latitude" => "180821" })
+      expect(@first_disruption["display_points"].first).to eq({ "lat" => 51.510725, "lng" => -0.092483 })
     end
   end
 end
