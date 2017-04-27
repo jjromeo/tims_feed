@@ -8,12 +8,18 @@ function initMap() {
     var markers = [];
 
     disruptions.map(function(disruption) {
+      var infoWindow = new google.maps.InfoWindow({ content: disruption.commentary })
       disruption.display_points.map(function(latlng) {
-        markers.push(new google.maps.Marker({position: latlng}));
+        var marker = new google.maps.Marker({ position: latlng })
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        })
+        markers.push(marker);
       });
     });
 
     var markerCluster = new MarkerClusterer(map, markers,
-    { imagePath: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m' });
+    { gridSize: 30, imagePath: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m' });
+    console.log('gridding')
   });
 }

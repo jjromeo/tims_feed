@@ -2,8 +2,8 @@ require 'httparty'
 require 'nokogiri'
 class TimsFeed
   TIMS_FEED_URL = 'https://data.tfl.gov.uk/tfl/syndication/feeds/tims_feed.xml'
-
   attr_reader :doc
+
   def initialize
     @doc = Nokogiri::XML(response.body)
   end
