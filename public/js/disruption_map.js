@@ -16,7 +16,8 @@ function initMap() {
     var markers = [];
 
     disruptions.map(function(disruption) {
-      var content = disruption.commentary + ' <b>Status: </b> ' + disruption.status
+      var statusText = '<h3><b>' + disruption.status + '</b></h3>'
+      var content = statusText + '<p>' + disruption.commentary + '</p>'
       var infoWindow = new google.maps.InfoWindow({ content: content })
       disruption.display_points.map(function(latlng) {
         var icon = 'images/markers/' + STATUS_COLOURS[disruption.status] + '_MarkerA.png'
