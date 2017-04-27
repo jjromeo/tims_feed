@@ -11,7 +11,8 @@ class TimsFeed
   def information_points
     disruptions.map do |disruption|
       comment = disruption.css('comments').first.text
-      { commentary: comment, display_points: display_points(disruption) }
+      status = disruption.css('status').first.text
+      { commentary: comment, status: status, display_points: display_points(disruption) }
     end
   end
 

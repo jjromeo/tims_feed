@@ -31,8 +31,13 @@ RSpec.describe 'server' do
       expect(@first_disruption["commentary"]).to eq "[A3211] Upper Thames Street (EC4R/EC4V) (Westbound) between Cousin Lane and Queen Street Place - Lane one (of two) closed to facilitate high voltage repair works. "
     end
 
+    it 'gets the status of a disruption' do
+      expect(@first_disruption['status']).to eq 'Active'
+    end
+
     it 'gets an array of coordinates to display points' do
       expect(@first_disruption["display_points"].first).to eq({ "lat" => 51.510725, "lng" => -0.092483 })
     end
+
   end
 end
